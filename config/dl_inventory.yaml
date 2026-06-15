@@ -1,0 +1,12 @@
+it_support_dls:
+  - address: "it-support@example.com"
+    display_name: "IT Support"
+  - address: "helpdesk@example.com"
+    display_name: "Help Desk"
+  - address: "support@example.com"
+    display_name: "Support Team"
+business_dls:
+  - address: "finance-support@example.com"
+    display_name: "Finance Support"
+  - address: "hr-support@example.com"
+    display_name: "HR Support"

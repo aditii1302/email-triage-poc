@@ -1,0 +1,19 @@
+Content-Type: multipart/mixed; boundary="===============8017880294935156107=="
+MIME-Version: 1.0
+From: jennifer41@corp.example.com
+To: support@example.com
+Subject: Issue with Finance System
+Message-ID: <e92a61ad-ada1-4095-b72a-e452d55a09b7@example.com>
+
+--===============8017880294935156107==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hi team,
+
+I am unable to access Finance System. Getting an error when logging in. Please assist.
+
+Regards,
+Erica Santiago
+--===============8017880294935156107==--

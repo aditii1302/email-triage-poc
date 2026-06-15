@@ -1,0 +1,19 @@
+Content-Type: multipart/mixed; boundary="===============4661079826957838872=="
+MIME-Version: 1.0
+From: velazquezcourtney@example.com
+To: support@example.com
+Subject: Issue with VPN Client
+Message-ID: <0ece73a4-32cb-4bf9-b483-8dd498558a0e@example.com>
+
+--===============4661079826957838872==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hi team,
+
+I am unable to access VPN Client. Getting an error when logging in. Please assist.
+
+Regards,
+Scott Walker
+--===============4661079826957838872==--

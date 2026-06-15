@@ -1,0 +1,19 @@
+Content-Type: multipart/mixed; boundary="===============7432370806530847499=="
+MIME-Version: 1.0
+From: seanaguilar@example.com
+To: support@example.com
+Subject: Issue with Email System
+Message-ID: <13d6fc52-6db3-4957-b1d7-c9986824b6ee@example.com>
+
+--===============7432370806530847499==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hi team,
+
+I am unable to access Email System. Getting an error when logging in. Please assist.
+
+Regards,
+Kenneth Baker
+--===============7432370806530847499==--

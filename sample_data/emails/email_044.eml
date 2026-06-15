@@ -1,0 +1,14 @@
+Content-Type: multipart/mixed; boundary="===============0585939678967776052=="
+MIME-Version: 1.0
+From: melissamelendez@corp.example.com
+To: support@example.com
+Subject: Meeting invite: Q3 Planning
+Message-ID: <c25aed12-86c7-49b9-8752-06f7ceb7cf58@example.com>
+
+--===============0585939678967776052==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+You are invited to Q3 planning meeting on Friday at 2pm.
+--===============0585939678967776052==--

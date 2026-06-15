@@ -1,0 +1,14 @@
+Content-Type: multipart/mixed; boundary="===============5787168273932000223=="
+MIME-Version: 1.0
+From: david05@example.com
+To: support@example.com
+Subject: Re: Thanks!
+Message-ID: <811cdd3f-6fd6-47db-8d95-d46c314c8491@example.com>
+
+--===============5787168273932000223==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Just wanted to say thanks for resolving my issue! All working now.
+--===============5787168273932000223==--

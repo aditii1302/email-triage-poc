@@ -1,0 +1,14 @@
+Content-Type: multipart/mixed; boundary="===============5496100617597340962=="
+MIME-Version: 1.0
+From: nicolewest@corp.example.com
+To: support@example.com
+Subject: Out of office
+Message-ID: <edc5340e-0db7-4f22-9929-d472102ff2d9@example.com>
+
+--===============5496100617597340962==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+I am out of office and will return next Monday.
+--===============5496100617597340962==--

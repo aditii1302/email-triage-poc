@@ -1,0 +1,19 @@
+Content-Type: multipart/mixed; boundary="===============4143222138124291040=="
+MIME-Version: 1.0
+From: annawatkins@corp.example.com
+To: support@example.com
+Subject: Issue with Employee Portal
+Message-ID: <d7875a55-b352-43f1-b4d6-fdbee19d9391@example.com>
+
+--===============4143222138124291040==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hi team,
+
+I am unable to access Employee Portal. Getting an error when logging in. Please assist.
+
+Regards,
+Troy Anthony
+--===============4143222138124291040==--

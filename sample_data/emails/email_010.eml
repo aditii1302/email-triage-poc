@@ -1,0 +1,19 @@
+Content-Type: multipart/mixed; boundary="===============1434045291625091977=="
+MIME-Version: 1.0
+From: elizabethjohnson@corp.example.com
+To: support@example.com
+Subject: Issue with SharePoint
+Message-ID: <161b72f7-210f-4e74-8f01-d9c700b53888@example.com>
+
+--===============1434045291625091977==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hi team,
+
+I am unable to access SharePoint. Getting an error when logging in. Please assist.
+
+Regards,
+Michael Graham
+--===============1434045291625091977==--

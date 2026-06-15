@@ -1,0 +1,21 @@
+Content-Type: multipart/mixed; boundary="===============8696807066012174816=="
+MIME-Version: 1.0
+From: nicoleclark@corp.example.com
+To: support@example.com
+Subject: Re: Follow up on VPN Client
+Message-ID: <8ea4956b-deac-4c9f-a339-0c1ed607247b@example.com>
+In-Reply-To: <thread-5@example.com>
+References: <thread-5@example.com>
+
+--===============8696807066012174816==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hi,
+
+Still cannot access VPN Client. Error SYS-500. This is urgent.
+
+Regards,
+Jacob Harris
+--===============8696807066012174816==--

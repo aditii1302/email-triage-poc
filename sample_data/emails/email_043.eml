@@ -1,0 +1,14 @@
+Content-Type: multipart/mixed; boundary="===============6276331413508044428=="
+MIME-Version: 1.0
+From: jessica05@example.com
+To: support@example.com
+Subject: FYI - Maintenance tonight
+Message-ID: <3282eea1-a5ff-406f-a5aa-630034b1cd08@example.com>
+
+--===============6276331413508044428==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Maintenance tonight from 10pm to 2am. No action needed.
+--===============6276331413508044428==--

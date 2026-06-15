@@ -1,0 +1,19 @@
+Content-Type: multipart/mixed; boundary="===============1833953597603037606=="
+MIME-Version: 1.0
+From: zamoradenise@example.com
+To: support@example.com
+Subject: Issue with Payroll System
+Message-ID: <8e653f4e-fe03-45d0-8488-597c3d37fc46@example.com>
+
+--===============1833953597603037606==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hi team,
+
+I am unable to access Payroll System. Getting an error when logging in. Please assist.
+
+Regards,
+Rose Wilcox
+--===============1833953597603037606==--

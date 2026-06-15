@@ -1,0 +1,21 @@
+rules:
+  - match:
+      application: "HR Portal"
+    category: "Application Access"
+  - match:
+      application: "Finance System"
+    category: "Financial Systems"
+  - match:
+      keywords: ["password", "login", "locked", "auth", "access denied"]
+    category: "Identity & Access"
+  - match:
+      keywords: ["slow", "timeout", "performance", "lag", "unresponsive"]
+    category: "Performance"
+  - match:
+      keywords: ["error", "crash", "exception", "failed", "failure"]
+    category: "Application Error"
+  - match:
+      keywords: ["install", "upgrade", "update", "version"]
+    category: "Software Installation"
+  - default: true
+    category: "General Request"

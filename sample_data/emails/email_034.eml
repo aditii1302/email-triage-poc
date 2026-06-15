@@ -1,0 +1,20 @@
+Content-Type: multipart/mixed; boundary="===============4232161356336459954=="
+MIME-Version: 1.0
+From: mmyers@corp.example.com
+To: support@example.com
+Subject: Cannot access HR Portal
+Message-ID: <a2f6f278-716d-4e58-ae20-95f4c93336df@example.com>
+
+--===============4232161356336459954==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hi,
+
+Unable to authenticate on HR Portal, error AUTH-401 appears.
+
+Please help.
+
+Maurice Thompson
+--===============4232161356336459954==--

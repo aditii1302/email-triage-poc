@@ -1,0 +1,19 @@
+Content-Type: multipart/mixed; boundary="===============5391854100671122438=="
+MIME-Version: 1.0
+From: jonathanrobinson@corp.example.com
+To: support@example.com
+Subject: Problem with HR Portal
+Message-ID: <d51e08f4-eb27-47b9-9c6f-dfbd543606d9@example.com>
+
+--===============5391854100671122438==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hi,
+
+Having trouble with HR Portal. Not sure what is happening but I cannot get in.
+
+Thanks,
+Sarah Ray
+--===============5391854100671122438==--

@@ -1,0 +1,10 @@
+dedup:
+  high_threshold: 0.85
+  low_threshold: 0.65
+  lookback_days: 7
+priority_default: "P3"
+poll_interval_seconds: 5
+llm:
+  provider: ollama
+  text_model: llama3.1
+  vision_model: llava

@@ -1,0 +1,19 @@
+Content-Type: multipart/mixed; boundary="===============3897929836277613434=="
+MIME-Version: 1.0
+From: harristiffany@example.com
+To: support@example.com
+Subject: Issue with HR Portal
+Message-ID: <fcd73cf5-00da-40de-9627-48808c9cfd1f@example.com>
+
+--===============3897929836277613434==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hi team,
+
+I am unable to access HR Portal. Getting an error when logging in. Please assist.
+
+Regards,
+Melody Berry
+--===============3897929836277613434==--

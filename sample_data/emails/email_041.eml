@@ -1,0 +1,14 @@
+Content-Type: multipart/mixed; boundary="===============0434571846591639690=="
+MIME-Version: 1.0
+From: frobinson@example.com
+To: support@example.com
+Subject: Team Newsletter
+Message-ID: <cff0eeab-fcde-45a8-b644-e111f0f77b91@example.com>
+
+--===============0434571846591639690==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hi all, please find this months newsletter. Best regards, HR Team
+--===============0434571846591639690==--

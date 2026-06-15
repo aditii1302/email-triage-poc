@@ -1,0 +1,14 @@
+Content-Type: multipart/mixed; boundary="===============7871706922022540697=="
+MIME-Version: 1.0
+From:  john.smith@example.com
+To: support@example.com
+Subject:  Cannot access the HR Portal
+Message-ID: <sim-1781485682.891926@example.com>
+
+--===============7871706922022540697==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+ Hi team, I am unable to log into the HR Portal since this morning. I keep getting an AUTH-401 error after entering my credentials. Please help urgently.
+--===============7871706922022540697==--

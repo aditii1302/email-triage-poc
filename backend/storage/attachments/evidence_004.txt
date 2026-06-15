@@ -1,0 +1,2 @@
+Synthetic attachment for email 4
+This file is safe test data for parser and triage smoke tests.
