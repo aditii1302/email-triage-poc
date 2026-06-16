@@ -90,7 +90,7 @@ def run_classification(raw_email_id: int, extraction: dict) -> dict:
         canonical_app = catalogue.get((application or "").lower().strip(), application)
 
         # Use stated category if present, otherwise apply SOP rules
-        if stated_category:
+        if stated_category and stated_category.lower() not in ("null", "none", ""):
             category = stated_category
         else:
             category = _apply_sop_rules(rules, canonical_app, problem_statement, business_unit)

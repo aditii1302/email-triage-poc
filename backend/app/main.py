@@ -120,7 +120,7 @@ def simulate_email(req: SimulateEmailRequest):
     msg = MIMEMultipart()
     msg["From"] = req.from_addr
     msg["To"] = req.to_addr
-    msg["Subject"] = req.subject
+    msg["Subject"] = req.subject if req.subject and req.subject.strip() else "(no subject)"
     msg["Message-ID"] = f"<sim-{datetime.utcnow().timestamp()}@example.com>"
     msg.attach(MIMEText(req.body, "plain"))
 

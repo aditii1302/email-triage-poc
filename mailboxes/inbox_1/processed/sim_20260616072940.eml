@@ -1,0 +1,21 @@
+Content-Type: multipart/mixed; boundary="===============7267416343182974629=="
+MIME-Version: 1.0
+From: sarah.jones@example.com
+To: support@example.com
+Subject: sarah.jones@example.com
+Message-ID: <sim-1781575180.129919@example.com>
+
+--===============7267416343182974629==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hi team,
+
+Outlook crashes every time I open it since the Windows update yesterday.
+Error: OUTLOOK-CRASH-0xC0000005
+
+Please help.
+
+Sarah
+--===============7267416343182974629==--
