@@ -1,0 +1,11 @@
+You are analyzing a screenshot from an IT support ticket.
+Describe what you see in this image, focusing on:
+- Any error messages or dialog boxes
+- Error codes or reference numbers
+- Application name visible in the window title or UI
+- Any status indicators (red icons, warning symbols)
+- Any text that would help a support engineer understand the problem
+
+{hint}
+
+Be concise and factual. Do not speculate beyond what is visible.

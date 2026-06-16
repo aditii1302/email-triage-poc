@@ -1,0 +1,27 @@
+You are an IT support triage assistant.
+Extract structured information from the following support email thread.
+
+Email thread:
+{thread_text}
+
+{attachment_section}
+
+Instructions:
+- problem_statement: summarize the issue in 1-2 sentences
+- impacted_application: the name of the affected system or app, or null if unknown
+- impacted_business_unit: the team or department affected, or null if unknown
+- error_details: any error codes, error messages, or stack traces mentioned, or null
+- affected_users: list of email addresses of affected users (not support staff)
+- stated_category: the category if the sender explicitly mentions one, otherwise null
+- extraction_confidence: your confidence in the extraction from 0.0 to 1.0
+
+Respond with ONLY a JSON object in this exact format, no markdown, no explanation:
+{{
+    "problem_statement": "string",
+    "impacted_application": "string or null",
+    "impacted_business_unit": "string or null",
+    "error_details": "string or null",
+    "affected_users": ["list of emails"],
+    "stated_category": "string or null",
+    "extraction_confidence": 0.0 to 1.0
+}}
