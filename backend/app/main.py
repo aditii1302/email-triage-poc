@@ -44,7 +44,7 @@ def get_runs():
             eid = run.raw_email_id
             if eid not in stages_by_email:
                 stages_by_email[eid] = 0
-            if run.status == "completed":
+            if run.status in ("completed", "success"):
                 stage_num = 0
                 if "stage1" in run.stage_name: stage_num = 1
                 elif "stage2" in run.stage_name: stage_num = 2
@@ -106,7 +106,7 @@ def get_run_detail(run_id: int):
                     "status": s.status,
                     "input_payload": s.input_payload,
                     "output_payload": s.output_payload,
-                    "created_at": str(s.created_at),
+                    "created_at": str(s.started_at),
                 }
                 for s in stages
             ]

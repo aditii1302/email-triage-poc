@@ -82,6 +82,9 @@ class OllamaLLMClient:
         )
         raw = _call_ollama(prompt, settings.OLLAMA_TEXT_MODEL)
         data = _parse_json_with_retry(raw, settings.OLLAMA_TEXT_MODEL)
+        for key, val in data.items():
+            if val in ("null", "None", "none"):
+                data[key] = None
         return ExtractionResult(**data)
 
     def describe_image(

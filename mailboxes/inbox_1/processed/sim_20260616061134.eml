@@ -1,0 +1,23 @@
+Content-Type: multipart/mixed; boundary="===============8215544736707375938=="
+MIME-Version: 1.0
+From:  sarah.jones@example.com
+To: support@example.com
+Subject: Cannot connect to VPN - urgent
+Message-ID: <sim-1781570494.340986@example.com>
+
+--===============8215544736707375938==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hi team,
+
+I have been unable to connect to the VPN since this morning.
+I get error code VPN-503 every time I try to connect.
+This is blocking me from accessing all internal systems.
+
+Please help urgently.
+
+Regards,
+Sarah Jones
+--===============8215544736707375938==--
