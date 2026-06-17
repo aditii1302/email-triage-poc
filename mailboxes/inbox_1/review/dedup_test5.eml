@@ -1,0 +1,20 @@
+Content-Type: multipart/mixed; boundary="===============8467907375454427879=="
+MIME-Version: 1.0
+From: sarah.jones@example.com
+To: support@example.com
+Subject: Outlook crashing again
+Message-ID: <dedup-test-005@example.com>
+
+--===============8467907375454427879==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hi team,
+
+Outlook is crashing on startup again, same as before. Getting an error related to the recent Windows update.
+
+Please look into this.
+
+Sarah
+--===============8467907375454427879==--
