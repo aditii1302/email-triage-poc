@@ -1,0 +1,19 @@
+Content-Type: multipart/mixed; boundary="===============0674092717700846544=="
+MIME-Version: 1.0
+From: sarah.jones@example.com
+To: support@example.com
+Subject: Outlook having issues
+Message-ID: <dedup-test-004@example.com>
+
+--===============0674092717700846544==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hi,
+
+I am having some trouble with Outlook. Not totally sure what is wrong but it seems unstable.
+
+Thanks,
+Sarah
+--===============0674092717700846544==--

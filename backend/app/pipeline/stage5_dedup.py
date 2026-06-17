@@ -62,9 +62,17 @@ def run_dedup(raw_email_id: int, extraction: dict) -> dict:
             ):
                 similarity = 1 - distance
 
+                meta_app = metadata.get("application", "").lower()
+                meta_raw_app = metadata.get("raw_application", "").lower()
+                app_lower = application.lower()
                 same_app = (
-                    metadata.get("application", "").lower()
-                    == application.lower()
+                    meta_app == app_lower
+                    or meta_raw_app == app_lower
+                    or meta_app in app_lower
+                    or app_lower in meta_app
+                    or meta_raw_app in app_lower
+                    or app_lower in meta_raw_app
+                    or meta_app == ""
                 )
 
                 same_user = any(
@@ -134,7 +142,7 @@ def run_dedup(raw_email_id: int, extraction: dict) -> dict:
         db.close()
 
 
-def index_ticket(ticket_id: str, problem_statement: str, application: str, business_unit: str, affected_users: list):
+def index_ticket(ticket_id: str, problem_statement: str, application: str, business_unit: str, affected_users: list, raw_application: str = ""):
     embedding = model.encode(problem_statement).tolist()
     collection.upsert(
         ids=[ticket_id],
@@ -142,6 +150,7 @@ def index_ticket(ticket_id: str, problem_statement: str, application: str, busin
         metadatas=[{
             "ticket_id": ticket_id,
             "application": application,
+            "raw_application": raw_application.lower(),
             "business_unit": business_unit,
             "affected_users": ",".join(affected_users),
         }],

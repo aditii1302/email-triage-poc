@@ -96,12 +96,14 @@ def run_ticket_creation(
         itsm_b_key = itsm_b_result.get("key")
 
         # Index in ChromaDB for future dedup
+        raw_application = extraction.get("impacted_application", "") or ""
         index_ticket(
             ticket_id=itsm_a_number,
             problem_statement=problem_statement,
             application=application,
             business_unit=business_unit or "",
             affected_users=affected_users,
+            raw_application=raw_application,
         )
 
         output_payload = {
