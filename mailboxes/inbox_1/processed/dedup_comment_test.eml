@@ -1,0 +1,21 @@
+Content-Type: multipart/mixed; boundary="===============4680381159120731636=="
+MIME-Version: 1.0
+From: sarah.jones@example.com
+To: support@example.com
+Subject: Outlook keeps crashing on startup
+Message-ID: <dedup-test-comment-001@example.com>
+
+--===============4680381159120731636==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hi team,
+
+Outlook crashes every time I open it since the Windows update yesterday.
+Error: OUTLOOK-CRASH-0xC0000005
+
+Please help.
+
+Sarah
+--===============4680381159120731636==--

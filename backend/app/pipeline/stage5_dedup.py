@@ -58,6 +58,8 @@ def run_dedup(raw_email_id: int, extraction: dict) -> dict:
 
         status = "NONE"
         matched_ticket_id = None
+        matched_itsm_a_id = None
+        matched_itsm_b_key = None
 
         if results and results["distances"] and results["distances"][0]:
             for distance, metadata in zip(
@@ -97,14 +99,20 @@ def run_dedup(raw_email_id: int, extraction: dict) -> dict:
                     if similarity >= high_threshold:
                         status = "LINKED-TO-EXISTING"
                         matched_ticket_id = metadata.get("ticket_id")
+                        matched_itsm_a_id = metadata.get("itsm_a_id")
+                        matched_itsm_b_key = metadata.get("itsm_b_key")
                         break
                     elif similarity >= low_threshold:
                         status = "POSSIBLE-DUPLICATE-REVIEW"
                         matched_ticket_id = metadata.get("ticket_id")
+                        matched_itsm_a_id = metadata.get("itsm_a_id")
+                        matched_itsm_b_key = metadata.get("itsm_b_key")
 
         output_payload = {
             "ai_duplicate_check_status": status,
             "matched_ticket_id": matched_ticket_id,
+            "matched_itsm_a_id": matched_itsm_a_id,
+            "matched_itsm_b_key": matched_itsm_b_key,
             "problem_statement": problem_statement,
             "application": application,
         }
@@ -150,7 +158,7 @@ def run_dedup(raw_email_id: int, extraction: dict) -> dict:
         db.close()
 
 
-def index_ticket(ticket_id: str, problem_statement: str, application: str, business_unit: str, affected_users: list, raw_application: str = ""):
+def index_ticket(ticket_id: str, problem_statement: str, application: str, business_unit: str, affected_users: list, raw_application: str = "", itsm_a_id: str = "", itsm_b_key: str = ""):
     embedding = model.encode(problem_statement).tolist()
     collection.upsert(
         ids=[ticket_id],
@@ -162,5 +170,7 @@ def index_ticket(ticket_id: str, problem_statement: str, application: str, busin
             "business_unit": business_unit,
             "affected_users": ",".join(affected_users),
             "created_at": time.time(),
+            "itsm_a_id": itsm_a_id or "",
+            "itsm_b_key": itsm_b_key or "",
         }],
     )

@@ -14,7 +14,7 @@ from backend.app.pipeline.stage3_extract import run_extraction
 from backend.app.pipeline.stage4_classify import run_classification
 from backend.app.pipeline.stage5_dedup import run_dedup
 from backend.app.pipeline.stage6_enrich import run_enrichment
-from backend.app.pipeline.stage7_ticket import run_ticket_creation
+from backend.app.pipeline.stage7_ticket import run_ticket_creation, append_duplicate_comment
 from backend.app.pipeline.stage8_route import run_routing
 
 
@@ -56,7 +56,8 @@ def run_full_pipeline(file_path: str):
         tickets = run_ticket_creation(raw_email_id, extraction, classification, enrichment, dedup)
         print(f"Stage 7 done — ITSM-A: {tickets['itsm_a_number']} ITSM-B: {tickets['itsm_b_key']}")
     else:
-        print("Stage 7 skipped — linked to existing ticket")
+        comment_result = append_duplicate_comment(raw_email_id, dedup)
+        print(f"Stage 7 done - comment appended to existing ticket {comment_result['matched_ticket_id']}")
 
     # Stage 8
     route = run_routing(raw_email_id, is_actionable=True, dedup_status=dedup["ai_duplicate_check_status"])

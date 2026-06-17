@@ -5,6 +5,7 @@ from backend.app.db import SessionLocal
 from backend.app.models.raw_email import RawEmail
 from backend.app.utils.pipeline_logger import complete_stage, fail_stage, start_stage
 from backend.app.pipeline.stage5_dedup import index_ticket
+from backend.app.models.ticket_link import TicketLink
 
 logger = logging.getLogger(__name__)
 STAGE_NAME = "stage7_ticket"
@@ -104,7 +105,19 @@ def run_ticket_creation(
             business_unit=business_unit or "",
             affected_users=affected_users,
             raw_application=raw_application,
+            itsm_a_id=itsm_a_id,
+            itsm_b_key=itsm_b_key,
         )
+
+        ticket_link = TicketLink(
+            itsm_a_id=itsm_a_id,
+            itsm_a_number=itsm_a_number,
+            itsm_b_id=str(itsm_b_result.get("id", "")),
+            itsm_b_key=itsm_b_key,
+            raw_email_id=raw_email_id,
+        )
+        db.add(ticket_link)
+
 
         output_payload = {
             "itsm_a_id": itsm_a_id,
@@ -130,6 +143,115 @@ def run_ticket_creation(
                 "raw_email_id": raw_email_id,
                 "itsm_a_number": itsm_a_number,
                 "itsm_b_key": itsm_b_key,
+            },
+        )
+
+        return output_payload
+
+    except Exception as exc:
+        db.rollback()
+        try:
+            fail_stage(
+                db,
+                pipeline_run,
+                stage_name=STAGE_NAME,
+                correlation_id=None,
+                input_payload={"raw_email_id": raw_email_id},
+                output_payload={"error_type": type(exc).__name__},
+                error_message=str(exc),
+            )
+            db.commit()
+        except Exception:
+            db.rollback()
+        raise
+
+    finally:
+        db.close()
+
+
+
+def append_duplicate_comment(raw_email_id: int, dedup: dict) -> dict:
+    db = SessionLocal()
+    pipeline_run = None
+
+    try:
+        email_record = db.query(RawEmail).filter(RawEmail.id == raw_email_id).first()
+        if not email_record:
+            raise ValueError(f"RawEmail {raw_email_id} not found")
+
+        input_payload = {"raw_email_id": raw_email_id, "dedup": dedup}
+        pipeline_run = start_stage(db, STAGE_NAME, input_payload=input_payload)
+
+        itsm_a_id = dedup.get("matched_itsm_a_id")
+        itsm_b_key = dedup.get("matched_itsm_b_key")
+        matched_ticket_id = dedup.get("matched_ticket_id")
+
+        note = (
+            f"--- New related email received ---\n"
+            f"From: {email_record.sender}\n"
+            f"Subject: {email_record.subject}\n\n"
+            f"{email_record.body}\n"
+            f"--- end of new email ---"
+        )
+
+        commented_a = False
+        commented_b = False
+
+        if itsm_a_id:
+            try:
+                get_resp = requests.get(
+                    f"{settings.ITSM_A_BASE_URL}/api/now/table/incident/{itsm_a_id}",
+                    timeout=10,
+                )
+                get_resp.raise_for_status()
+                current = get_resp.json()["result"]
+                updated_description = f"{current.get('description', '')}\n\n{note}"
+                patch_resp = requests.patch(
+                    f"{settings.ITSM_A_BASE_URL}/api/now/table/incident/{itsm_a_id}",
+                    json={"description": updated_description},
+                    timeout=10,
+                )
+                patch_resp.raise_for_status()
+                commented_a = True
+            except Exception as exc:
+                logger.warning(f"append_duplicate_comment: failed to update ITSM-A {itsm_a_id}: {exc}")
+
+        if itsm_b_key:
+            try:
+                comment_resp = requests.post(
+                    f"{settings.ITSM_B_BASE_URL}/rest/api/2/issue/{itsm_b_key}/comment",
+                    json={"body": note},
+                    timeout=10,
+                )
+                comment_resp.raise_for_status()
+                commented_b = True
+            except Exception as exc:
+                logger.warning(f"append_duplicate_comment: failed to comment on ITSM-B {itsm_b_key}: {exc}")
+
+        output_payload = {
+            "matched_ticket_id": matched_ticket_id,
+            "matched_itsm_a_id": itsm_a_id,
+            "matched_itsm_b_key": itsm_b_key,
+            "commented_itsm_a": commented_a,
+            "commented_itsm_b": commented_b,
+        }
+
+        complete_stage(
+            db,
+            pipeline_run,
+            raw_email_id=raw_email_id,
+            output_payload=output_payload,
+        )
+
+        db.commit()
+
+        logger.info(
+            "stage7.duplicate_comment_appended",
+            extra={
+                "raw_email_id": raw_email_id,
+                "matched_ticket_id": matched_ticket_id,
+                "commented_itsm_a": commented_a,
+                "commented_itsm_b": commented_b,
             },
         )
 

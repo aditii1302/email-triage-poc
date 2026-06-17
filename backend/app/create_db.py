@@ -9,6 +9,7 @@ from backend.app.db import engine
 from backend.app.models.base import Base
 from backend.app.models.pipeline_run import PipelineRun
 from backend.app.models.raw_email import RawEmail
+from backend.app.models.ticket_link import TicketLink
 
 Base.metadata.create_all(bind=engine)
 
