@@ -1,4 +1,5 @@
 import logging
+import time
 import yaml
 import chromadb
 from sentence_transformers import SentenceTransformer
@@ -39,6 +40,9 @@ def run_dedup(raw_email_id: int, extraction: dict) -> dict:
         high_threshold = settings["dedup"]["high_threshold"]
         low_threshold = settings["dedup"]["low_threshold"]
 
+        lookback_days = settings["dedup"].get("lookback_days", 7)
+        cutoff_timestamp = time.time() - (lookback_days * 86400)
+
         problem_statement = extraction.get("problem_statement", "")
         application = extraction.get("impacted_application", "") or ""
         business_unit = extraction.get("impacted_business_unit", "") or ""
@@ -61,6 +65,10 @@ def run_dedup(raw_email_id: int, extraction: dict) -> dict:
                 results["metadatas"][0]
             ):
                 similarity = 1 - distance
+
+                ticket_created_at = metadata.get("created_at", 0)
+                if ticket_created_at and ticket_created_at < cutoff_timestamp:
+                    continue
 
                 meta_app = metadata.get("application", "").lower()
                 meta_raw_app = metadata.get("raw_application", "").lower()
@@ -153,5 +161,6 @@ def index_ticket(ticket_id: str, problem_statement: str, application: str, busin
             "raw_application": raw_application.lower(),
             "business_unit": business_unit,
             "affected_users": ",".join(affected_users),
+            "created_at": time.time(),
         }],
     )
