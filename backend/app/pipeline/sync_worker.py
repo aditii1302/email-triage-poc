@@ -71,38 +71,51 @@ def _update_itsm_a(sys_id: str, fields: dict) -> None:
 
 
 def _sync_once() -> None:
+    from backend.app.db import SessionLocal
+    from backend.app.models.ticket_link import TicketLink
+
     incidents = _get_itsm_a_incidents()
     issues = _get_itsm_b_issues()
 
-    # Build lookup for ITSM-B by position (they were created in order)
-    itsm_b_by_index = {i: issue for i, issue in enumerate(issues)}
+    # Build lookup of ITSM-B issues by key (real identifier, not position)
+    issues_by_key = {issue.get('key'): issue for issue in issues if issue.get('key')}
 
-    for i, incident in enumerate(incidents):
-        number = incident.get('number')
-        state = incident.get('state')
-        urgency = incident.get('urgency')
-        sys_id = incident.get('sys_id')
+    db = SessionLocal()
+    try:
+        for incident in incidents:
+            number = incident.get('number')
+            state = incident.get('state')
+            urgency = incident.get('urgency')
+            sys_id = incident.get('sys_id')
 
-        last = _last_known.get(number, {})
+            # Look up the real ITSM-B key for this incident via ticket_links
+            link = db.query(TicketLink).filter(TicketLink.itsm_a_id == sys_id).first()
+            if not link or not link.itsm_b_key:
+                continue
 
-        # Detect change in ITSM-A state -> push to ITSM-B
-        if last.get('state') != state and i in itsm_b_by_index:
-            issue_key = itsm_b_by_index[i].get('key')
-            if issue_key:
+            issue = issues_by_key.get(link.itsm_b_key)
+            if not issue:
+                continue
+
+            last = _last_known.get(number, {})
+
+            # Detect change in ITSM-A state -> push to ITSM-B
+            if last.get('state') != state:
                 itsm_b_status = 'Closed' if state == 'resolved' else 'In Progress' if state == 'in_progress' else 'Open'
-                _update_itsm_b(issue_key, {'status': itsm_b_status})
+                _update_itsm_b(issue['key'], {'status': itsm_b_status})
 
-        # Detect change in ITSM-B status -> push to ITSM-A
-        if i in itsm_b_by_index:
-            b_status = itsm_b_by_index[i].get('status')
+            # Detect change in ITSM-B status -> push to ITSM-A
+            b_status = issue.get('status')
             if last.get('b_status') != b_status and b_status == 'Closed' and state != 'resolved':
                 _update_itsm_a(sys_id, {'state': 'resolved'})
 
-        _last_known[number] = {
-            'state': state,
-            'urgency': urgency,
-            'b_status': itsm_b_by_index.get(i, {}).get('status'),
-        }
+            _last_known[number] = {
+                'state': state,
+                'urgency': urgency,
+                'b_status': b_status,
+            }
+    finally:
+        db.close()
 
 
 def run_sync_worker() -> None:

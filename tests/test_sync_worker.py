@@ -45,8 +45,13 @@ def test_sync_once_state_change_pushes_to_itsm_b():
     incidents = [{'number': 'INC001', 'state': 'resolved', 'urgency': '3', 'sys_id': 'sys-001'}]
     issues = [{'key': 'SUP-101', 'status': 'Open'}]
 
+    mock_link = MagicMock()
+    mock_link.itsm_b_key = 'SUP-101'
+    mock_db = MagicMock()
+    mock_db.query.return_value.filter.return_value.first.return_value = mock_link
+
     mock_resp = MagicMock()
-    with patch('backend.app.pipeline.sync_worker._get_itsm_a_incidents', return_value=incidents),          patch('backend.app.pipeline.sync_worker._get_itsm_b_issues', return_value=issues),          patch('requests.put', return_value=mock_resp):
+    with patch('backend.app.pipeline.sync_worker._get_itsm_a_incidents', return_value=incidents),          patch('backend.app.pipeline.sync_worker._get_itsm_b_issues', return_value=issues),          patch('backend.app.db.SessionLocal', return_value=mock_db),          patch('requests.put', return_value=mock_resp):
         _sync_once()
 
     mock_resp.raise_for_status.assert_called()
@@ -59,7 +64,12 @@ def test_sync_once_updates_last_known():
     incidents = [{'number': 'INC002', 'state': 'new', 'urgency': '3', 'sys_id': 'sys-002'}]
     issues = [{'key': 'SUP-102', 'status': 'Open'}]
 
-    with patch('backend.app.pipeline.sync_worker._get_itsm_a_incidents', return_value=incidents),          patch('backend.app.pipeline.sync_worker._get_itsm_b_issues', return_value=issues):
+    mock_link = MagicMock()
+    mock_link.itsm_b_key = 'SUP-102'
+    mock_db = MagicMock()
+    mock_db.query.return_value.filter.return_value.first.return_value = mock_link
+
+    with patch('backend.app.pipeline.sync_worker._get_itsm_a_incidents', return_value=incidents),          patch('backend.app.pipeline.sync_worker._get_itsm_b_issues', return_value=issues),          patch('backend.app.db.SessionLocal', return_value=mock_db):
         _sync_once()
 
     assert 'INC002' in sync_worker._last_known
