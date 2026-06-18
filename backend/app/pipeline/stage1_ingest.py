@@ -66,6 +66,7 @@ def process_email(file_path: str) -> RawEmail:
             subject=email_data.get("subject"),
             body=email_data.get("body"),
             attachment_count=len(attachments),
+            attachment_paths=attachments,
             file_path=file_path,
             status="new",
         )

@@ -38,8 +38,8 @@ def run_extraction(raw_email_id: int) -> dict:
             from backend.app.parsing.image_parser import parse_image
             import os
 
-            for path in (email_record.file_path or "").split(","):
-                path = path.strip()
+            for path in (email_record.attachment_paths or []):
+                path = (path or "").strip()
                 if not path or not os.path.exists(path):
                     continue
                 ext = os.path.splitext(path)[1].lower()
